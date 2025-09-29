@@ -59,7 +59,21 @@ The risk of error arises from Type I error (α), rejecting a true null hypothesi
   
   - What is the difference between a paired and an unpaired test?  
 A paired test compares two related samples, such as before-and-after measurements on the same subjects, while an unpaired test compares two independent groups.  
-(Altman, *Practical Statistics for Medical Research*, 1st ed., 1990)  
+(Altman, *Practical Statistics for Medical Research*, 1st ed., 1990)
 
+## Effect of treatment over time
+This is a very classical question in clinical or sport research: does a treatment-training have an effect over time?
+
+To answer this question scientifically, measurements must be taken before and after treatment, and possibly later, in order to assess whether the effect is lasting or not.
+
+### The data
+
+Download the file ```PrePost.csv```
+
+This file contains before/after measurements. The treatment is a rehabilitation training for individuals with cardiac conditions.
+
+Before going further, you have to make clear what are the measured variables. What do they measure? What are the units? What are the possible values? What are the expected changes over rehabilitation.
+
+Make a table, with one row per variable, and the following columns:
 
 
