@@ -1,6 +1,6 @@
 ---
-title: "A minimal notebook to analyse test data\n"
-author: "Denis MOTTET"
+title: "Statistical tests - Assignment\n"
+author: "Alexis LAGARDE"
 date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
 output:
   html_document:
@@ -10,81 +10,56 @@ output:
     number_sections: true
 ---
 
-# Objective
-The goal of this notebook is to illustrate a minimal data analysis pipeline, from a data file to a result chart.   
-We shall count the number of individuals and save a graph of their gender distribution. 
+# Statistical tests: comparison of medians (or means?)
+In this series of exercises, you will explore how to compare two groups of data, using non-parametric tests (or parametric tests… if it makes sense to do so).
 
-
-NOTE: this notebook follows the logic of the `.gitignore` file to ensure the confidentiality of personal data from human volunteers while allowing the testing of methods on pseudonymized data that we have made public.  
-- the `data` folder is not shared by Git, except for files in the `data/test_data/` subfolder.  
-- the `results` folder is not shared by Git, except for files in the `results/test_results/` subfolder.  
-
-
-# Load the data
-The data file is provided in the `data/test_data/` folder.  
-The csv file contains one individual per line and several columns, with the column name appearing in the first line of the file.
-
-```{r load_data, echo=TRUE, message=FALSE, warning=FALSE}
-# Load the data from the CSV file
-students <- read.csv("data/test_data/students.csv")
-# Display the first few rows of the dataset
-head(students)
-# Display the full structure of the dataset
-# View(students)
-```
-
-
-
-
-# Count the number of students
-```{r count_students, echo=FALSE, message=FALSE, warning=FALSE}
-# Count the number of students in the dataset
-num_students <- nrow(students)
-
-# Print the number of students in a nice sentence 
-cat("The number of students in the dataset is:", num_students, "\n")
-``` 
-
-# Make a gender chart of students
-
-```{r plot_gender, echo=TRUE, message=FALSE, warning=FALSE}
-# Count males and females
-num_male = nrow(students[students$Gender == "M", ])
-num_female = nrow(students[students$Gender == "F", ])
+## Make clear what is a statistical test, and when to use it.
+Below are some questions to guide your analysis. You can answer them in your notebook, with a short sentence for each question.
   
-# Save the counts in a data frame for plotting
-gender_df <- data.frame(
-  gender = c("Male", "Female"),
-  count = c(num_male, num_female)
-)
+  - What is a median? A mean?  
+The median is the middle value of an ordered dataset, while the mean is the arithmetic average of all values.  
+(Freedman, Pisani & Purves, *Statistics*, 4th ed., 2007)  
 
-# Add percentage and label for chart
-gender_df$percent <- round(gender_df$count / sum(gender_df$count) * 100, 1)
-gender_df$label <- paste0( gender_df$percent, "%")
+  - What is a variance? A standard deviation?  
+The variance is the average of the squared deviations from the mean, and the standard deviation is the square root of the variance, expressed in the same units as the data.  
+(Freedman, Pisani & Purves, *Statistics*, 4th ed., 2007)  
 
-# Load ggplot2 for plotting
-library(ggplot2)
+  - What is a normal distribution?  
+A normal distribution is a symmetric, bell-shaped probability distribution defined by its mean and standard deviation.  
+(Montgomery & Runger, *Applied Statistics and Probability for Engineers*, 7th ed., 2018)  
 
-ggplot(gender_df, aes(x = gender, y = count, fill = gender)) +
-  geom_bar( stat = "identity") +
-  theme(legend.position = "none") +
-  geom_text(aes(label = label), position = position_stack(vjust = 0.5)) +
-  labs(title = "Gender Distribution")
+  - What is a statistical test?  
+A statistical test is a procedure that uses sample data to decide whether to reject a null hypothesis about a population.  
+(Montgomery & Runger, *Applied Statistics and Probability for Engineers*, 7th ed., 2018)  
 
-```
+  - When to use a statistical test?  
+A statistical test is used when comparing groups, assessing relationships, or checking whether observed results could be due to chance.  
+(Altman, *Practical Statistics for Medical Research*, 1st ed., 1990)  
 
+  - What is a parametric test? A non-parametric test?  
+A parametric test assumes that data follow a known distribution, usually normal, whereas a non-parametric test makes fewer assumptions and can be applied to ordinal or non-normally distributed data.  
+(Field, *Discovering Statistics Using SPSS*, 5th ed., 2018)  
 
-# Save the gender chart in the results folder
+  - What are the assumptions of parametric tests?  
+Parametric tests assume normality, homogeneity of variances, independence of observations, and data measured on an interval or ratio scale.  
+(Field, *Discovering Statistics Using SPSS*, 5th ed., 2018)  
 
-The results file is saved in the `results/test_results/` folder. 
+  - What are the assumptions of non-parametric tests?  
+Non-parametric tests generally assume only independence of observations, without requiring normality or equal variances.    
+(Conover, *Practical Nonparametric Statistics*, 3rd ed., 1999)  
 
-```{r save_plot, echo=TRUE, message=FALSE, warning=FALSE}
-# save the gender distribution plot in the results folder
-fname <- "gender_distribution_plot.png"
-fpath <- "results/test_results"
-ggsave(filename = fname, path = fpath, units = "cm", width = 10, heigh = 5, scale = 1.5 )
+  - What is a p-value?  
+A p-value is the probability of obtaining results at least as extreme as those observed if the null hypothesis is true.  
+(Casella & Berger, *Statistical Inference*, 2nd ed., 2002)  
 
-``` 
+  - What is the risk of error when using a statistical test?  
+The risk of error arises from Type I error (α), rejecting a true null hypothesis, and Type II error (β), failing to reject a false null hypothesis.  
+(Casella & Berger, *Statistical Inference*, 2nd ed., 2002)  
+
+  
+  - What is the difference between a paired and an unpaired test?  
+A paired test compares two related samples, such as before-and-after measurements on the same subjects, while an unpaired test compares two independent groups.  
+(Altman, *Practical Statistics for Medical Research*, 1st ed., 1990)  
 
 
 
