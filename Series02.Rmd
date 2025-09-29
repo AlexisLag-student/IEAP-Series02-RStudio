@@ -77,3 +77,31 @@ Before going further, you have to make clear what are the measured variables. Wh
 Make a table, with one row per variable, and the following columns:
 
 
+<table border="1" align="center">
+  <tr>
+    <th align="center" valign="middle">Variable</th>
+    <th align="center" valign="middle">Description</th>
+    <th align="center" valign="middle">Unit</th>
+    <th align="center" valign="middle">Possible values</th>
+    <th align="center" valign="middle">Expected change after rehabilitation</th>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">Perf</td>
+    <td align="center" valign="middle">Heart rate in beats per minute  measured during exercise test.</td>
+    <td align="center" valign="middle">BPM</td>
+    <td align="center" valign="middle">125–148 bpm (range in the dataset)</td>
+    <td align="center" valign="middle">Expected toincrease, since patients are able to reach higher exercise heart rates after rehabilitation.</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">Time</td>
+    <td align="center" valign="middle">Measurement moment, indicating whether the heart rate was recorded before or after the rehabilitation program.</td>
+    <td align="center" valign="middle">Categorical (`Before`, `After`)</td>
+    <td align="center" valign="middle">Only two values: Before, After </td>
+    <td align="center" valign="middle">No change expected since `Time` is used as grouping variable for comparison.</td>
+  </tr>
+</table>
+
+
+
+
+
