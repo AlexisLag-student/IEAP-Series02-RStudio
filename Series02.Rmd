@@ -140,6 +140,17 @@ ggplot(data, aes(x = time, y = perf, fill = time)) +
   - What sentence will you write in your thesis to explain your result?  
 Patient showed a significant increase in heart rate after rehabilitation, indicating that the treatment was effective in improving cardiovascular performance.
 
+## Testing some stereotypes
+Humans have stereotypes, some of them are probably true, some others are probably false (e.g., ref ).
+
+Here, we will test stereotypes about snorers… among others.
+
+### The data
+Download the file `snore.txt`
+
+This file contains anthropometric and qualitative measurements (1 person per line).
+
+
 
 
 
