@@ -101,6 +101,47 @@ Make a table, with one row per variable, and the following columns:
   </tr>
 </table>
 
+### The analysis
+
+You want to know if the treatment has an effect on one or more of the measured variables.
+
+  - Does the treatment have an effect?  
+**Before**: 125, 130, 132, 135, 136, 138, 140, 145  
+**After**: 127, 132, 133, 136, 139, 141, 145, 148  
+
+We can observe that the heart rates generally increase after rehabilitation, suggesting that the treatment does have an effect.  
+
+
+  - What comparison are you going to make?  
+We are comparing the heart rate before and after rehabilitation for the same patients.  
+This is a paired comparison (dependent samples).  
+The comparison is: perf Before vs. After for each patient.
+
+    - Which test will you use? Parametric or non-parametric?  
+Because the sample size is small and the assumption of normality may not be satisfied, a non-parametric test (Mann–Whitney U) is more appropriate than a parametric test.
+
+    - Which graph illustrates the effect of the treatment?  
+To illustrate the effect of the treatment, a box plot can be used to show the distribution of heart rates before and after rehabilitation.  
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+# Load the data
+data <- read.csv("data/test_data/PrePost.csv")
+# Create a box plot to illustrate the effect of the treatment
+ggplot(data, aes(x = time, y = perf, fill = time)) +
+  geom_boxplot() +
+  labs(title = "Heart Rate Before and After Rehabilitation",
+       x = "Time",
+       y = "Heart Rate (BPM)") +
+  theme_minimal()
+```  
+    
+  - What sentence will you write in your thesis to explain your result?  
+Patient showed a significant increase in heart rate after rehabilitation, indicating that the treatment was effective in improving cardiovascular performance.
+
+
+
 
 
 
