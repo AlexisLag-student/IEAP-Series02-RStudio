@@ -178,3 +178,31 @@ data_snore %>%
             sd_weight = sd(weight, na.rm = TRUE))
 ```
 Yes, the data suggest that snorers tend to have a higher weight compared to non-snorers. The box plot shows that the median weight of snorers is higher, and the summary statistics confirm this observation.
+- Do snorers drink or smoke more?
+```{r}
+library(ggplot2)
+# Bar plot of drinking status by snoring status
+
+ggplot(data_snore, aes(x = factor(alcool), fill = factor(snore))) +
+  geom_bar(position = "dodge") +
+  labs(
+    title = "Number of people per alcohol consumption and snoring status",
+    x = "Amout of alcohol drinked",
+    y = "Number of people",
+    fill = "Snorers"
+  ) +
+  theme_minimal()
+
+# Bar plot of smoking status by snoring status
+ggplot(data_snore, aes(x = snore, fill = tabac)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Smoking Status by Snoring Status",
+       x = "Snoring Status",
+       y = "Proportion") +
+  theme_minimal()
+```
+
+On the alcohol graph, snorers are spread across higher alcohol categories, but non-snorers still make up the majority of the `0` group. The difference exists but isn’t huge.
+On the smoking graph, the gap is a way clearer, a higher proportion of snorers are smokers compared to non-snorers.
+
+Snorers are more strongly associated with smoking than with drinking. The smoking difference between snorers and non-snorers is more pronounced than the drinking difference.
