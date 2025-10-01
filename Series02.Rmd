@@ -208,6 +208,7 @@ On the smoking graph, the gap is a way clearer, a higher proportion of snorers a
 Snorers are more strongly associated with smoking than with drinking. The smoking difference between snorers and non-snorers is more pronounced than the drinking difference.
 
   - Are men fatter?
+  
 ```{r message=FALSE, warning=FALSE}
 
 library(ggplot2)
@@ -240,4 +241,56 @@ data_snore %>%
 ```
 The boxplot indicates that men are not fatter than women in this dataset, as women have a slightly higher median weight (~97 kg vs ~94 kg for men), while men simply show a greater variability in their weight distribution.
 
+  - Do women smoke less?
+  
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Load data
+data_snore <- read.table("data/test_data/snore.txt", header = TRUE)
+
+# Recode sex and tabac, and force factor levels
+data_snore <- data_snore %>%
+  mutate(
+    sex = factor(ifelse(sex == "H", "Male", "Female"), levels = c("Male", "Female")),
+    smoker = ifelse(tabac == "O", "Smoker", "Non-smoker")
+  )
+
+# Calculate percentage of smokers by sex
+smoking_percent <- data_snore %>%
+  group_by(sex) %>%
+  summarise(percent_smoker = mean(smoker == "Smoker") * 100, .groups = "drop") %>%
+  complete(sex, fill = list(percent_smoker = 0))  # ensure both sexes appear
+
+# Side-by-side bar plot
+ggplot(smoking_percent, aes(x = sex, y = percent_smoker, fill = sex)) +
+  geom_col(width = 0.5) +
+  geom_text(aes(label = paste0(round(percent_smoker, 1), "%")), 
+            vjust = -0.5, size = 5) +
+  coord_cartesian(ylim = c(0, 100)) +
+  labs(title = "Percentage of Smokers by Sex",
+       x = "Sex",
+       y = "Percentage") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+```
+
+At first glance, women tend to smoke less than men (40% vs. 72%), but we need to perform a statistical test to confirm if this difference is significant.  
+We will calculate the p-value using a Chi-squared test. If:
+
+  - p-value < 0.05, the difference is statistically significant.  
+  - p-value > 0.05, the difference could be due to chance.  
+
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+# Create contingency table
+tab <- table(data_snore$sex, data_snore$smoker)
+chisq.test(tab)
+
+```
+
+After the Chi-squared test, we know that p-value is < 0.05, we can now conclude that women smoke significantly less than men in our dataset.
 
