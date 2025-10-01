@@ -70,6 +70,10 @@ To answer this question scientifically, measurements must be taken before and af
 
 Download the file ```PrePost.csv```
 
+```{r}
+data <- read.csv("data/test_data/PrePost.csv")
+```
+
 This file contains before/after measurements. The treatment is a rehabilitation training for individuals with cardiac conditions.
 
 Before going further, you have to make clear what are the measured variables. What do they measure? What are the units? What are the possible values? What are the expected changes over rehabilitation.
@@ -126,8 +130,6 @@ To illustrate the effect of the treatment, a box plot can be used to show the di
 ```{r}
 # Load necessary libraries
 library(ggplot2)
-# Load the data
-data <- read.csv("data/test_data/PrePost.csv")
 # Create a box plot to illustrate the effect of the treatment
 ggplot(data, aes(x = time, y = perf, fill = time)) +
   geom_boxplot() +
@@ -147,13 +149,9 @@ Here, we will test stereotypes about snorers… among others.
 
 ### The data
 Download the file `snore.txt`
+```{r}
+data_snore <- read.table("data/test_data/snore.txt", header = TRUE)
+```
 
 This file contains anthropometric and qualitative measurements (1 person per line).
-
-
-
-
-
-
-
 
