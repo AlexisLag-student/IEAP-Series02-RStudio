@@ -206,3 +206,38 @@ On the alcohol graph, snorers are spread across higher alcohol categories, but n
 On the smoking graph, the gap is a way clearer, a higher proportion of snorers are smokers compared to non-snorers.
 
 Snorers are more strongly associated with smoking than with drinking. The smoking difference between snorers and non-snorers is more pronounced than the drinking difference.
+
+  - Are men fatter?
+```{r message=FALSE, warning=FALSE}
+
+library(ggplot2)
+library(dplyr)
+
+data_snore$sex <- ifelse(data_snore$sex == "H", "Male", "Female")
+
+ggplot(data_snore, aes(x = sex, y = weight, fill = sex)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Weight distribution by sex",
+       x = "Sex",
+       y = "Weight (kg)") +
+  theme_minimal()
+
+
+data_snore %>%
+  group_by(sex) %>%
+  summarise(
+    count = n(),
+    mean = mean(weight, na.rm = TRUE),
+    sd = sd(weight, na.rm = TRUE),
+    min = min(weight, na.rm = TRUE),
+    Q1 = quantile(weight, 0.25, na.rm = TRUE),
+    median = median(weight, na.rm = TRUE),
+    Q3 = quantile(weight, 0.75, na.rm = TRUE),
+    max = max(weight, na.rm = TRUE)
+  )
+
+
+```
+The boxplot indicates that men are not fatter than women in this dataset, as women have a slightly higher median weight (~97 kg vs ~94 kg for men), while men simply show a greater variability in their weight distribution.
+
+
