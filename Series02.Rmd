@@ -294,3 +294,43 @@ chisq.test(tab)
 
 After the Chi-squared test, we know that p-value is < 0.05, we can now conclude that women smoke significantly less than men in our dataset.
 
+  - From a more general perspective:
+    - Are there any correlations between variables?
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ggplot2)
+library(dplyr)
+library(corrplot)
+library(knitr)
+library(tidyr)
+
+numeric_vars <- data_snore %>% select(where(is.numeric))
+
+cor_matrix <- cor(numeric_vars, use = "complete.obs")
+
+corrplot(
+  cor_matrix,
+  method = "circle",      
+  type = "upper",         
+  diag = FALSE,           
+  tl.col = "black",       
+  tl.srt = 45,        
+  title = "Correlation Matrix of Numeric Variables",
+  mar = c(0,0,2,0)    
+)
+
+cor_table <- cor_matrix %>%
+  as.data.frame() %>%
+  mutate(var1 = rownames(.)) %>%
+  pivot_longer(-var1, names_to = "var2", values_to = "correlation") %>%
+  filter(var1 < var2) %>%
+  mutate(correlation = round(correlation, 2))
+
+cor_table
+
+```
+Based on the correlation analysis, there is only one strong relationship among the variables: height and weight are very highly positively correlated (0.93), which means that taller individuals also tend to weigh more. This is expected and consistent with biological patterns.
+
+For the other variables, the correlations are either very close to zero or weak. Age shows virtually no correlation with weight (0.00) or height (0.02), and only a very weak negative correlation with alcohol consumption (-0.16). Similarly, alcohol consumption has only weak positive correlations with weight (0.09) and height (0.11).
+
+Overall, the conclusion is that height and weight are strongly related, while age and alcohol consumption do not show meaningful correlations with the other variables in this dataset.
