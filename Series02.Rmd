@@ -10,6 +10,16 @@ output:
     number_sections: true
 ---
 
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(corrplot)
+library(knitr)
+```
+
 # Statistical tests: comparison of medians (or means?)
 In this series of exercises, you will explore how to compare two groups of data, using non-parametric tests (or parametric tests… if it makes sense to do so).
 
@@ -128,8 +138,6 @@ Because the sample size is small and the assumption of normality may not be sati
 To illustrate the effect of the treatment, a box plot can be used to show the distribution of heart rates before and after rehabilitation.  
 
 ```{r}
-# Load necessary libraries
-library(ggplot2)
 # Create a box plot to illustrate the effect of the treatment
 ggplot(data, aes(x = time, y = perf, fill = time)) +
   geom_boxplot() +
@@ -161,8 +169,6 @@ This file contains anthropometric and qualitative measurements (1 person per lin
 
     - Are snorers fatter?
 ```{r message=FALSE, warning=FALSE}
-library(ggplot2)
-library(dplyr)
 # Box plot of weight by snoring status
 ggplot(data_snore, aes(x = snore, y = weight, fill = snore)) +
   geom_boxplot() +
@@ -180,9 +186,7 @@ data_snore %>%
 Yes, the data suggest that snorers tend to have a higher weight compared to non-snorers. The box plot shows that the median weight of snorers is higher, and the summary statistics confirm this observation.
 - Do snorers drink or smoke more?
 ```{r}
-library(ggplot2)
 # Bar plot of drinking status by snoring status
-
 ggplot(data_snore, aes(x = factor(alcool), fill = factor(snore))) +
   geom_bar(position = "dodge") +
   labs(
@@ -210,10 +214,6 @@ Snorers are more strongly associated with smoking than with drinking. The smokin
   - Are men fatter?
   
 ```{r message=FALSE, warning=FALSE}
-
-library(ggplot2)
-library(dplyr)
-
 data_snore$sex <- ifelse(data_snore$sex == "H", "Male", "Female")
 
 ggplot(data_snore, aes(x = sex, y = weight, fill = sex)) +
@@ -244,10 +244,6 @@ The boxplot indicates that men are not fatter than women in this dataset, as wom
   - Do women smoke less?
   
 ```{r}
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-
 # Load data
 data_snore <- read.table("data/test_data/snore.txt", header = TRUE)
 
@@ -298,12 +294,6 @@ After the Chi-squared test, we know that p-value is < 0.05, we can now conclude 
     - Are there any correlations between variables?
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
-library(ggplot2)
-library(dplyr)
-library(corrplot)
-library(knitr)
-library(tidyr)
-
 numeric_vars <- data_snore %>% select(where(is.numeric))
 
 cor_matrix <- cor(numeric_vars, use = "complete.obs")
