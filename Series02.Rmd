@@ -183,8 +183,10 @@ data_snore %>%
             median_weight = median(weight, na.rm = TRUE),
             sd_weight = sd(weight, na.rm = TRUE))
 ```
-Yes, the data suggest that snorers tend to have a higher weight compared to non-snorers. The box plot shows that the median weight of snorers is higher, and the summary statistics confirm this observation.
-- Do snorers drink or smoke more?
+Yes, the data suggest that snorers tend to have a higher weight compared to non-snorers. The box plot shows that the median weight of snorers is higher, and the summary statistics confirm this observation.  
+  
+  - Do snorers drink or smoke more?
+  
 ```{r}
 # Bar plot of drinking status by snoring status
 ggplot(data_snore, aes(x = factor(alcool), fill = factor(snore))) +
