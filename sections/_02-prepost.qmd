@@ -89,3 +89,13 @@ Individual and aggregate changes in performance scores before and after cardiac 
 - Does the treatment have an effect?
 
   - Yes. The physical performance scores increased for all 8 patients following the cardiac rehabilitation program. According to the paired test, the the rehabilitation program had a statistically significant positive effect (t(7)=5.40, p=0.001) on performance. The mean improvement was 2.50 points.
+
+<!-- -->
+
+- What comparison are you going to make?
+
+  - Which test will you use? Parametric or non-parametric?
+
+    - The parametric paired t-test. The Shapiro-Wilk test on the score differences yielded a p-value of 0.2828. Since this is greater than 0.05, the data meets the required assumption of normality, allowing for a parametric test.
+
+  - 
