@@ -119,7 +119,7 @@ ggplot(snore, aes(x = snore, y = alcool)) +
 
 We use a Mann–Whitney U test to determine whether alcohol consumption differs significantly between snorers and non-snorers.
 
-```{r Mann–Whitney U test3}
+```{r Mann–Whitney U test alcohol consumption between snorers and non-snorers}
 
 # Perform a Mann–Whitney U test
 # H0: alcohol consumption does not differ between snorers and non-snorers
@@ -182,6 +182,45 @@ smoking_table <- table(snore$snore, snore$tabac)
   fisher.test(smoking_table)
 ```
 
-### Results
+### Results : 
 
 The proportion of smokers was 67.7% among non-snorers and 57.1% among snorers. Fisher's exact test showed no statistically significant association between smoking status and snoring status (p = 0.3827).
+
+## Are men fatter ?
+
+We calculate the mean and median BMI for men and women to describe and compare body mass index between the two sex groups.
+
+```{r Sex groups BMI}
+# Mean BMI for each sex group
+tapply(snore$BMI, snore$sex, mean)
+
+# Median BMI for each sex group
+tapply(snore$BMI, snore$sex, median)
+```
+
+We visualize the BMI distributions of men and women to assess their variability and identify possible differences between the two groups.
+
+```{r BMI sex groups Boxplot}
+# Compare BMI distributions between men and women
+ggplot(snore, aes(x = sex, y = BMI)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.1) +
+  labs(
+    x = "Sex",
+    y = "Body Mass Index (BMI)"
+  )
+```
+
+We use a Mann–Whitney U test to determine whether BMI differs significantly between men and women.
+
+```{r Mann–Whitney U test BMI between men and women}
+# Perform a Mann–Whitney U test
+# H0: BMI does not differ between men and women
+# H1: BMI differs between men and women
+
+wilcox.test(BMI ~ sex, data = snore)
+```
+
+### Results
+
+The mean BMI was 27.04 kg/m² in women and 27.27 kg/m² in men, while the median BMI was 27.73 and 28.08 kg/m², respectively. No statistically significant difference in BMI was observed between women and men (Mann–Whitney U test, W = 850, p = 0.4884).
