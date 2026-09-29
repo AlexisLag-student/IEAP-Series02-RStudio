@@ -31,3 +31,9 @@ A parametric test assumes that the data follow a known distribution (usually nor
 compares its parameters (e.g. means for the *t*-test). A non-parametric test makes no
 assumption on the shape of the distribution and usually works on the ranks of the data
 (e.g. Wilcoxon, Mann–Whitney) [@nahm2016].
+
+**What are the assumptions of parametric tests?**
+Independent observations, approximately normal data (or normal differences for paired
+tests), and for some tests equal variances between groups. Normality can be checked with a
+Q–Q plot or a Shapiro–Wilk test [@ghasemi2012]; Welch's *t*-test removes the
+equal-variance assumption [@welch1947].
