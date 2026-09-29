@@ -1,2 +1,6 @@
 # Statistical tests: what they are and when to use them
 
+**What is a median? A mean?**
+The mean is the sum of the values divided by their number. The median is the value that
+splits the ordered data into two halves (50% below, 50% above). The median is robust to
+extreme values; the mean is not [@manikandan2011].
