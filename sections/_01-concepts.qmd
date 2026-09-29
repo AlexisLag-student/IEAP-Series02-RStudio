@@ -4,3 +4,9 @@
 The mean is the sum of the values divided by their number. The median is the value that
 splits the ordered data into two halves (50% below, 50% above). The median is robust to
 extreme values; the mean is not [@manikandan2011].
+
+**What is a variance? A standard deviation?**
+The variance is the mean of the squared deviations from the mean (divided by $n-1$ for a
+sample). The standard deviation (SD) is its square root, so it is expressed in the same
+unit as the data. The SD describes the spread of the individual values; it should not be
+confused with the standard error, which describes the precision of the mean [@altman2005].
