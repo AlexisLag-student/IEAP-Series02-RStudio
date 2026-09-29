@@ -1,2 +1,62 @@
 # Statistical tests: what they are and when to use them
 
+**What is a median? A mean?**
+The mean is the sum of the values divided by their number. The median is the value that
+splits the ordered data into two halves (50% below, 50% above). The median is robust to
+extreme values; the mean is not [@manikandan2011].
+
+**What is a variance? A standard deviation?**
+The variance is the mean of the squared deviations from the mean (divided by $n-1$ for a
+sample). The standard deviation (SD) is its square root, so it is expressed in the same
+unit as the data. The SD describes the spread of the individual values; it should not be
+confused with the standard error, which describes the precision of the mean [@altman2005].
+
+**What is a normal distribution?**
+A symmetric, bell-shaped distribution fully described by its mean and SD. About 68% of the
+values fall within ±1 SD of the mean and about 95% within ±1.96 SD [@altman1995].
+
+**What is a statistical test?**
+A procedure that uses sample data to decide whether the observed result is compatible with
+a null hypothesis $H_0$ (e.g. "no difference between groups"). It computes a test statistic
+and the probability of observing a statistic at least as extreme if $H_0$ were true
+[@greenland2016].
+
+**When to use a statistical test?**
+When we want to generalise from a sample to a population: for example, to decide whether a
+difference between two groups, or between before and after a treatment, is larger than what
+chance sampling variability alone would produce [@banerjee2009].
+
+**What is a parametric test? A non-parametric test?**
+A parametric test assumes that the data follow a known distribution (usually normal) and
+compares its parameters (e.g. means for the *t*-test). A non-parametric test makes no
+assumption on the shape of the distribution and usually works on the ranks of the data
+(e.g. Wilcoxon, Mann–Whitney) [@nahm2016].
+
+**What are the assumptions of parametric tests?**
+Independent observations, approximately normal data (or normal differences for paired
+tests), and for some tests equal variances between groups. Normality can be checked with a
+Q–Q plot or a Shapiro–Wilk test [@ghasemi2012]; Welch's *t*-test removes the
+equal-variance assumption [@welch1947].
+
+**What are the assumptions of non-parametric tests?**
+Independent observations (or independent pairs), a variable that is at least ordinal and,
+to interpret the Mann–Whitney test as a comparison of medians, distributions of similar
+shape in both groups [@hart2001]. The Wilcoxon signed-rank test also assumes that the
+differences are distributed symmetrically [@wilcoxon1945].
+
+**What is a p-value?**
+The probability, assuming $H_0$ is true (and all model assumptions hold), of obtaining a
+result at least as extreme as the one observed. It is *not* the probability that $H_0$ is
+true, and it does not measure the size or importance of an effect [@wasserstein2016].
+
+**What is the risk of error when using a statistical test?**
+Type I error ($\alpha$): rejecting $H_0$ when it is true (false positive), usually fixed
+at 5%. Type II error ($\beta$): failing to reject $H_0$ when it is false (false negative);
+$1-\beta$ is the power of the test. Running many tests inflates the overall type I error
+[@banerjee2009].
+
+**What is the difference between a paired and an unpaired test?**
+A paired test compares two measurements taken on the *same* individuals (e.g. before and
+after training): it analyses the within-subject differences. An unpaired test compares two
+*independent* groups (e.g. snorers vs non-snorers). Using an unpaired test on paired data
+ignores the within-subject correlation and loses power [@bland2009].
