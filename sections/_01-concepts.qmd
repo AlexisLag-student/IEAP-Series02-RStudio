@@ -25,3 +25,9 @@ and the probability of observing a statistic at least as extreme if $H_0$ were t
 When we want to generalise from a sample to a population: for example, to decide whether a
 difference between two groups, or between before and after a treatment, is larger than what
 chance sampling variability alone would produce [@banerjee2009].
+
+**What is a parametric test? A non-parametric test?**
+A parametric test assumes that the data follow a known distribution (usually normal) and
+compares its parameters (e.g. means for the *t*-test). A non-parametric test makes no
+assumption on the shape of the distribution and usually works on the ranks of the data
+(e.g. Wilcoxon, Mann–Whitney) [@nahm2016].
