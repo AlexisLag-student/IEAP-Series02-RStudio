@@ -54,3 +54,9 @@ Type I error ($\alpha$): rejecting $H_0$ when it is true (false positive), usual
 at 5%. Type II error ($\beta$): failing to reject $H_0$ when it is false (false negative);
 $1-\beta$ is the power of the test. Running many tests inflates the overall type I error
 [@banerjee2009].
+
+**What is the difference between a paired and an unpaired test?**
+A paired test compares two measurements taken on the *same* individuals (e.g. before and
+after training): it analyses the within-subject differences. An unpaired test compares two
+*independent* groups (e.g. snorers vs non-snorers). Using an unpaired test on paired data
+ignores the within-subject correlation and loses power [@bland2009].
