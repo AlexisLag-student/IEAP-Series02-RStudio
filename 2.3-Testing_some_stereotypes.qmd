@@ -171,7 +171,7 @@ ggplot(smoking_data, aes(x = Snoring, y = Proportion, fill = Smoking)) +
 
 We use Fisher's exact test to determine whether smoking status is statistically associated with snoring status. Fisher's exact test was used because both snoring status and smoking status are categorical variables forming a 2 \* 2 contingency table.
 
-```{r Fisher exact test1}
+```{r Fisher exact test smoking between snorers and non-snorers}
 # Create a contingency table
 smoking_table <- table(snore$snore, snore$tabac)
 
@@ -221,6 +221,60 @@ We use a Mann–Whitney U test to determine whether BMI differs significantly be
 wilcox.test(BMI ~ sex, data = snore)
 ```
 
-### Results
+### Results :
 
 The mean BMI was 27.04 kg/m² in women and 27.27 kg/m² in men, while the median BMI was 27.73 and 28.08 kg/m², respectively. No statistically significant difference in BMI was observed between women and men (Mann–Whitney U test, W = 850, p = 0.4884).
+
+## Do women smoke less?
+
+We calculate the number and proportion of smokers among men and women to determine whether smoking is less frequent among women.
+
+```{r Compare smoking proportions between men and women}
+# Number of smokers and non-smokers for each sex
+table(snore$sex, snore$tabac)
+
+# Proportion of smokers within each sex group
+prop.table(table(snore$sex, snore$tabac), margin = 1)
+```
+
+We visualize the proportion of smokers in each sex group to facilitate comparison between men and women.
+
+```{r Visualize data with contigency table}
+# Create a contingency table
+sex_smoking_table <- prop.table(
+  table(snore$sex, snore$tabac),
+  margin = 1
+)
+
+# Convert the table to a data frame
+sex_smoking_data <- as.data.frame(sex_smoking_table)
+
+# Rename the columns
+colnames(sex_smoking_data) <- c("Sex", "Smoking", "Proportion")
+
+# Plot the proportions
+ggplot(sex_smoking_data, aes(x = Sex, y = Proportion, fill = Smoking)) +
+  geom_col(position = "dodge") +
+  labs(
+    x = "Sex",
+    y = "Proportion",
+    fill = "Smoking status"
+  )
+```
+
+We use Fisher's exact test to determine whether smoking status is statistically associated with sex.
+
+```{r Fisher exact test smoking between men and women}
+# Create a contingency table
+sex_smoking_table <- table(snore$sex, snore$tabac)
+
+# Perform Fisher's exact test
+# H0: sex and smoking status are independent
+# H1: sex and smoking status are associated
+
+fisher.test(sex_smoking_table)
+```
+
+### Results : 
+
+Smoking was reported by 40% of women and 72% of men. Fisher's exact test showed a statistically significant association between sex and smoking status (p = 0.0073).
