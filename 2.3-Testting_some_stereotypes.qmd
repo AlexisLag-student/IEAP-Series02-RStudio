@@ -1,0 +1,36 @@
+---
+title: "2.3-Testing_some_stereotypes"
+format: html
+editor: visual
+---
+
+# 2.3 Testing some stereotypes 
+
+## Load the data 
+
+```{r Load the data}
+# Load the snoring dataset from the Data folder.
+snore <- read.table("Data/snore.txt", header = TRUE)
+
+# Check the structure of the dataset.
+str(snore)
+
+# Display the first observations.
+head(snore)
+```
+
+## Check the categorical variables
+
+```{r Check categorical variables}
+# Number of participants
+nrow(snore)
+
+# Number of participants according to snoring status
+table(snore$snore)
+
+# Number of participants according to sex
+table(snore$sex)
+
+# Number of participants according to smoking status
+table(snore$tabac)
+```
