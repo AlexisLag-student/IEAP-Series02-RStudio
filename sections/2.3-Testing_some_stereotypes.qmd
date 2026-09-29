@@ -1,0 +1,356 @@
+---
+title: "2.3-Testing_some_stereotypes"
+format: html
+editor: visual
+---
+
+# 2.3 Testing some stereotypes
+
+```{r import libraries}
+library(tidyverse)
+```
+
+## Load the data
+
+```{r load-data}
+# Load the snoring dataset from the Data folder.
+snore <- read.table("Data/snore.txt", header = TRUE)
+
+# Check the structure of the dataset.
+str(snore)
+
+# Display the first observations.
+head(snore)
+```
+
+## Check the categorical variables
+
+```{r check-categorical}
+# Number of participants
+nrow(snore)
+
+# Number of participants according to snoring status
+table(snore$snore)
+
+# Number of participants according to sex
+table(snore$sex)
+
+# Number of participants according to smoking status
+table(snore$tabac)
+```
+
+## Are snorers fatter?
+
+To compare body size between snorers and non-snorers, we calculate the Body Mass Index (BMI) from body weight and height, which accounts for differences in body size.
+
+```{r calc-bmi}
+
+# Calculate height in metres
+snore$height_m <- snore$height / 100
+
+# Calculate Body Mass Index (BMI)
+snore$BMI <- snore$weight / (snore$height_m^2)
+
+# Check the calculated BMI values
+head(snore[, c("weight", "height", "BMI")])
+```
+
+We calculate the mean and median BMI in each snoring group to describe and compare the central tendency of the two groups.
+
+```{r bmi-means}
+
+# Mean BMI for each snoring group
+tapply(snore$BMI, snore$snore, mean)
+
+# Median BMI for each snoring group
+tapply(snore$BMI, snore$snore, median)
+```
+
+We visualize the BMI distributions in snorers and non-snorers to assess their variability and identify possible differences between the two groups.
+
+```{r bmi-boxplot}
+# Compare BMI distributions between snorers and non-snorers
+ggplot(snore, aes(x = snore, y = BMI)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.1) +
+  labs(
+    x = "Snoring status",
+    y = "Body Mass Index (BMI)"
+  )
+```
+
+We use a Mann–Whitney U test to determine whether BMI differs significantly between snorers and non-snorers.
+
+```{r mw-bmi}
+# Perform a Mann–Whitney U test
+# H0: BMI does not differ between snorers and non-snorers
+# H1: BMI differs between snorers and non-snorers
+
+wilcox.test(BMI ~ snore, data = snore)
+```
+
+The p-value is compared with the significance level of 0.05 to determine whether the observed difference in BMI between the two groups is statistically significant.
+
+#### Results :
+
+The mean BMI was 27.27 kg/m² in non-snorers and 27.11 kg/m² in snorers, while the median BMI was 28.07 and 28.08 kg/m², respectively. The Mann–Whitney U test showed no statistically significant difference in BMI between the two groups (W = 1128.5, p = 0.951). Therefore, these data do not provide evidence that snorers have a different BMI from non-snorers.
+
+## Do snorers drink more ?
+
+We first calculate the mean and median alcohol consumption in each snoring group to describe and compare their alcohol consumption.
+
+```{r alcohol-means}
+# Mean alcohol consumption for each snoring group
+tapply(snore$alcool, snore$snore, mean)
+
+# Median alcohol consumption for each snoring group
+tapply(snore$alcool, snore$snore, median)
+```
+
+We visualize alcohol consumption in snorers and non-snorers to compare the distributions and identify possible differences or extreme values.
+
+```{r alcohol-boxplot}
+# Compare alcohol consumption between snorers and non-snorers
+ggplot(snore, aes(x = snore, y = alcool)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.1) +
+  labs(
+    x = "Snoring status",
+    y = "Alcohol consumption"
+  )
+```
+
+We use a Mann–Whitney U test to determine whether alcohol consumption differs significantly between snorers and non-snorers.
+
+```{r mw-alcohol}
+
+# Perform a Mann–Whitney U test
+# H0: alcohol consumption does not differ between snorers and non-snorers
+# H1: alcohol consumption differs between snorers and non-snorers
+
+wilcox.test(alcool ~ snore, data = snore)
+```
+
+### Results :
+
+Alcohol consumption was higher among snorers (mean = 4.03, median = 4) than among non-snorers (mean = 2.37, median = 0). For the statistical test part, since p = 0.008594 \< 0.05, we reject the null-hypothesis H0. A statistically significant difference in alcohol consumption was observed between snorers and non-snorers (Mann–Whitney U test, W = 788, p = 0.0086).
+
+## Do snorers smoke more ?
+
+We calculate the number and proportion of smokers in each snoring group to determine whether smoking is more frequent among snorers.
+
+```{r smoking-snore-table}
+# Number of smokers and non-smokers in each snoring group
+table(snore$snore, snore$tabac)
+
+# Proportion of smokers within each snoring group
+prop.table(table(snore$snore, snore$tabac), margin = 1)
+```
+
+We visualize the proportion of smokers in each snoring group to make the difference between the two groups easier to interpret.
+
+```{r smoking-snore-plot}
+# Create a contingency table
+smoking_table <- prop.table(
+  table(snore$snore, snore$tabac),
+  margin = 1
+)
+
+# Convert the table to a data frame
+smoking_data <- as.data.frame(smoking_table)
+
+# Rename the columns
+colnames(smoking_data) <- c("Snoring", "Smoking", "Proportion")
+
+# Plot the proportions
+ggplot(smoking_data, aes(x = Snoring, y = Proportion, fill = Smoking)) +
+  geom_col(position = "dodge") +
+  labs(
+    x = "Snoring status",
+    y = "Proportion",
+    fill = "Smoking status"
+  )
+```
+
+We use Fisher's exact test to determine whether smoking status is statistically associated with snoring status. Fisher's exact test was used because both snoring status and smoking status are categorical variables forming a 2 \* 2 contingency table.
+
+```{r fisher-smoking-snore}
+# Create a contingency table
+smoking_table <- table(snore$snore, snore$tabac)
+
+# Perform Fisher's exact test
+  # H0: smoking status and snoring status are independent
+  # H1: smoking status and snoring status are associated
+  
+  fisher.test(smoking_table)
+```
+
+### Results :
+
+The proportion of smokers was 67.7% among non-snorers and 57.1% among snorers. Fisher's exact test showed no statistically significant association between smoking status and snoring status (p = 0.3827).
+
+## Are men fatter ?
+
+We calculate the mean and median BMI for men and women to describe and compare body mass index between the two sex groups.
+
+```{r sex-bmi-means}
+# Mean BMI for each sex group
+tapply(snore$BMI, snore$sex, mean)
+
+# Median BMI for each sex group
+tapply(snore$BMI, snore$sex, median)
+```
+
+We visualize the BMI distributions of men and women to assess their variability and identify possible differences between the two groups.
+
+```{r sex-bmi-boxplot}
+# Compare BMI distributions between men and women
+ggplot(snore, aes(x = sex, y = BMI)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.1) +
+  labs(
+    x = "Sex",
+    y = "Body Mass Index (BMI)"
+  )
+```
+
+We use a Mann–Whitney U test to determine whether BMI differs significantly between men and women.
+
+```{r mw-bmi-sex}
+# Perform a Mann–Whitney U test
+# H0: BMI does not differ between men and women
+# H1: BMI differs between men and women
+
+wilcox.test(BMI ~ sex, data = snore)
+```
+
+### Results :
+
+The mean BMI was 27.04 kg/m² in women and 27.27 kg/m² in men, while the median BMI was 27.73 and 28.08 kg/m², respectively. No statistically significant difference in BMI was observed between women and men (Mann–Whitney U test, W = 850, p = 0.4884).
+
+## Do women smoke less?
+
+We calculate the number and proportion of smokers among men and women to determine whether smoking is less frequent among women.
+
+```{r smoking-sex-table}
+# Number of smokers and non-smokers for each sex
+table(snore$sex, snore$tabac)
+
+# Proportion of smokers within each sex group
+prop.table(table(snore$sex, snore$tabac), margin = 1)
+```
+
+We visualize the proportion of smokers in each sex group to facilitate comparison between men and women.
+
+```{r smoking-sex-plot}
+# Create a contingency table
+sex_smoking_table <- prop.table(
+  table(snore$sex, snore$tabac),
+  margin = 1
+)
+
+# Convert the table to a data frame
+sex_smoking_data <- as.data.frame(sex_smoking_table)
+
+# Rename the columns
+colnames(sex_smoking_data) <- c("Sex", "Smoking", "Proportion")
+
+# Plot the proportions
+ggplot(sex_smoking_data, aes(x = Sex, y = Proportion, fill = Smoking)) +
+  geom_col(position = "dodge") +
+  labs(
+    x = "Sex",
+    y = "Proportion",
+    fill = "Smoking status"
+  )
+```
+
+We use Fisher's exact test to determine whether smoking status is statistically associated with sex.
+
+```{r fisher-smoking-sex}
+# Create a contingency table
+sex_smoking_table <- table(snore$sex, snore$tabac)
+
+# Perform Fisher's exact test
+# H0: sex and smoking status are independent
+# H1: sex and smoking status are associated
+
+fisher.test(sex_smoking_table)
+```
+
+### Results :
+
+Smoking was reported by 40% of women and 72% of men. Fisher's exact test showed a statistically significant association between sex and smoking status (p = 0.0073).
+
+## From a more general perspective : are there any correlation between variables?
+
+We select the quantitative variables to investigate possible associations between age, body measurements, alcohol consumption, and BMI.
+
+```{r select-quant}
+# Select the quantitative variables
+quantitative_data <- snore[, c(
+  "age",
+  "weight",
+  "height",
+  "alcool",
+  "BMI"
+)]
+
+# Check the selected data
+head(quantitative_data)
+```
+
+We calculate a Spearman correlation matrix to identify monotonic associations between the quantitative variables.
+
+```{r spearman-matrix}
+# Calculate the Spearman correlation matrix
+cor(
+  quantitative_data,
+  method = "spearman"
+)
+```
+
+A very strong positive correlation was observed between weight and height (Spearman's rho = 0.930). A moderate positive correlation was observed between weight and BMI (rho = 0.544), while the correlation between height and BMI was weaker (rho = 0.300). The other associations were weak, including those between age and BMI (rho = -0.048) and between alcohol consumption and BMI (rho = 0.021).
+
+Because BMI is calculated from weight and height, correlations between BMI and these variables are partly mathematical and should therefore be interpreted with caution.
+
+### Visualization with pairwise scatterplots
+
+We visualize the relationships between the quantitative variables using pairwise scatterplots to identify possible linear or monotonic relationships.
+
+```{r pairs-plot}
+# Create pairwise scatterplots for the quantitative variables
+pairs(quantitative_data)
+```
+
+The scatterplots show a strong positive relationship between weight and height, while the other relationships appear weaker. In particular, the weight–height relationship is clearly visible as the points follow an increasing trend.
+
+## Test the correlations
+
+We perform Spearman correlation tests to determine whether the observed associations between the quantitative variables are statistically significant.
+
+```{r cor-tests}
+
+# Test the main correlations between quantitative variables
+
+# Weight and height
+cor.test(snore$weight, snore$height, method = "spearman")
+
+# Weight and BMI
+cor.test(snore$weight, snore$BMI, method = "spearman")
+
+# Height and BMI
+cor.test(snore$height, snore$BMI, method = "spearman")
+
+# Age and BMI
+cor.test(snore$age, snore$BMI, method = "spearman")
+
+# Alcohol consumption and BMI
+cor.test(snore$alcool, snore$BMI, method = "spearman")
+```
+
+A strong positive correlation was found between weight and height (Spearman's rho = 0.930, p \< 2.2e-16). Moderate and weak positive correlations were also observed between weight and BMI (p = 0.544, p \< 0.001) and between height and BMI (p = 0.300, p = 0.0024), respectively. No statistically significant correlation was found between age and BMI (p = -0.048, p = 0.635) or between alcohol consumption and BMI (p = 0.021, p = 0.835).
+
+### Results
+
+Overall, the results provided mixed evidence for the tested stereotypes, with significant differences found for alcohol consumption among snorers and smoking according to sex. The correlation analysis mainly highlighted strong associations between anthropometric variables, particularly weight and height.
