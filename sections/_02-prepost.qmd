@@ -41,3 +41,19 @@ Variable Descriptions
 |:--------------|:--------------|:--------------|:--------------|:--------------|
 | `perf` | Physical performance score of the patient | not given in the file | positive values; here 125 to 148 | ↑ after rehabilitation |
 | `time` | Moment of the measurement | — | `Before`, `After` | — (factor) |
+
+### **2.2.2 The analysis**
+
+#### Assessing normality
+
+First will check the normality by Shapiro-Wilk Normality Test, before deciding using Parametric or non-parametric test.
+
+```{r checking normality}
+# Check normality assumption
+shapiro_test <- shapiro.test(data_wide$difference)
+print(shapiro_test)
+```
+
+A Shapiro-Wilk test was conducted on the differences between post- and pre-treatment performance scores to evaluate the assumption of normality. The results show that the distribution of score differences does not significantly deviate from a normal distribution (W=0.899,p=0.283). Because p\>0.05, the assumption of normality is met, validating the choice of a parametric paired t-test for the main analysis.
+
+#### 
