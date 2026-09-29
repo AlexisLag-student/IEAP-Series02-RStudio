@@ -278,3 +278,76 @@ fisher.test(sex_smoking_table)
 ### Results : 
 
 Smoking was reported by 40% of women and 72% of men. Fisher's exact test showed a statistically significant association between sex and smoking status (p = 0.0073).
+
+## From a more general perspective : are there any correlation between variables?
+
+We select the quantitative variables to investigate possible associations between age, body measurements, alcohol consumption, and BMI.
+
+```{r Selection}
+# Select the quantitative variables
+quantitative_data <- snore[, c(
+  "age",
+  "weight",
+  "height",
+  "alcool",
+  "BMI"
+)]
+
+# Check the selected data
+head(quantitative_data)
+```
+
+We calculate a Spearman correlation matrix to identify monotonic associations between the quantitative variables.
+
+```{r Spearman correlation matrix}
+# Calculate the Spearman correlation matrix
+cor(
+  quantitative_data,
+  method = "spearman"
+)
+```
+
+A very strong positive correlation was observed between weight and height (Spearman's rho = 0.930). A moderate positive correlation was observed between weight and BMI (rho = 0.544), while the correlation between height and BMI was weaker (rho = 0.300). The other associations were weak, including those between age and BMI (rho = -0.048) and between alcohol consumption and BMI (rho = 0.021).
+
+Because BMI is calculated from weight and height, correlations between BMI and these variables are partly mathematical and should therefore be interpreted with caution.
+
+### Visualization with pairwise scatterplots
+
+We visualize the relationships between the quantitative variables using pairwise scatterplots to identify possible linear or monotonic relationships.
+
+```{r Pairwise scatterplots}
+# Create pairwise scatterplots for the quantitative variables
+pairs(quantitative_data)
+```
+
+The scatterplots show a strong positive relationship between weight and height, while the other relationships appear weaker. In particular, the weight–height relationship is clearly visible as the points follow an increasing trend.
+
+## Test the correlations
+
+We perform Spearman correlation tests to determine whether the observed associations between the quantitative variables are statistically significant.
+
+```{r Test the main correlations}
+
+# Test the main correlations between quantitative variables
+
+# Weight and height
+cor.test(snore$weight, snore$height, method = "spearman")
+
+# Weight and BMI
+cor.test(snore$weight, snore$BMI, method = "spearman")
+
+# Height and BMI
+cor.test(snore$height, snore$BMI, method = "spearman")
+
+# Age and BMI
+cor.test(snore$age, snore$BMI, method = "spearman")
+
+# Alcohol consumption and BMI
+cor.test(snore$alcool, snore$BMI, method = "spearman")
+```
+
+A strong positive correlation was found between weight and height (Spearman's rho = 0.930, p \< 2.2e-16). Moderate and weak positive correlations were also observed between weight and BMI (p = 0.544, p \< 0.001) and between height and BMI (p = 0.300, p = 0.0024), respectively. No statistically significant correlation was found between age and BMI (p = -0.048, p = 0.635) or between alcohol consumption and BMI (p = 0.021, p = 0.835).
+
+### Results
+
+Overall, the results provided mixed evidence for the tested stereotypes, with significant differences found for alcohol consumption among snorers and smoking according to sex. The correlation analysis mainly highlighted strong associations between anthropometric variables, particularly weight and height.
