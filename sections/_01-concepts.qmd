@@ -10,3 +10,7 @@ The variance is the mean of the squared deviations from the mean (divided by $n-
 sample). The standard deviation (SD) is its square root, so it is expressed in the same
 unit as the data. The SD describes the spread of the individual values; it should not be
 confused with the standard error, which describes the precision of the mean [@altman2005].
+
+**What is a normal distribution?**
+A symmetric, bell-shaped distribution fully described by its mean and SD. About 68% of the
+values fall within ±1 SD of the mean and about 95% within ±1.96 SD [@altman1995].
