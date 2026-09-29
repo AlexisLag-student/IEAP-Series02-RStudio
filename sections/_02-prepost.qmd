@@ -66,4 +66,20 @@ print(t_test_result)
 
 A paired-samples t-test was performed to determine whether the cardiac rehabilitation training had a significant effect on participant performance over time. Performance scores significantly increased following the intervention (t(7)=5.40, p=0.001), with a mean improvement of 2.50 points (95% CI \[1.41,3.59\]). Because p\<0.05, we reject the null hypothesis and conclude that the rehabilitation program had a statistically significant positive effect on performance.
 
-#### 
+#### Visualizing the data
+
+```{r}
+ggplot(data_long, aes(x = time, y = perf, fill = time)) +
+  geom_boxplot(alpha = 0.4, outlier.shape = NA, width = 0.5) +
+  geom_point(aes(group = ID), alpha = 0.8, size = 2) +
+  geom_line(aes(group = ID), alpha = 0.4, linewidth = 0.8) + 
+  labs(
+    title = "Performance Scores Before and After Cardiac Rehabilitation",
+    x = "Timepoint",
+    y = "Performance Score"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+Individual and aggregate changes in performance scores before and after cardiac rehabilitation. The boxplots represent the group's median and interquartile ranges at both timepoints. The connecting lines trace individual patient trajectories, illustrating that every single participant experienced an increase in their performance score following the intervention. A paired t-test confirmed this overall improvement (Mean difference = +2.5) is statistically significant (t = 5.40, p = 0.001).
