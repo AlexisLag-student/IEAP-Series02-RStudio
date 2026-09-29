@@ -56,4 +56,14 @@ print(shapiro_test)
 
 A Shapiro-Wilk test was conducted on the differences between post- and pre-treatment performance scores to evaluate the assumption of normality. The results show that the distribution of score differences does not significantly deviate from a normal distribution (W=0.899,p=0.283). Because p\>0.05, the assumption of normality is met, validating the choice of a parametric paired t-test for the main analysis.
 
+#### Running the paired t-test
+
+```{r parametric paired t-test}
+# Run the parametric paired t-test
+t_test_result <- t.test(data_wide$After, data_wide$Before, paired = TRUE)
+print(t_test_result)
+```
+
+A paired-samples t-test was performed to determine whether the cardiac rehabilitation training had a significant effect on participant performance over time. Performance scores significantly increased following the intervention (t(7)=5.40, p=0.001), with a mean improvement of 2.50 points (95% CI \[1.41,3.59\]). Because p\<0.05, we reject the null hypothesis and conclude that the rehabilitation program had a statistically significant positive effect on performance.
+
 #### 
