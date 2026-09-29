@@ -91,3 +91,43 @@ The p-value is compared with the significance level of 0.05 to determine whether
 #### Results : 
 
 The mean BMI was 27.27 kg/m² in non-snorers and 27.11 kg/m² in snorers, while the median BMI was 28.07 and 28.08 kg/m², respectively. The Mann–Whitney U test showed no statistically significant difference in BMI between the two groups (W = 1128.5, p = 0.951). Therefore, these data do not provide evidence that snorers have a different BMI from non-snorers.
+
+## Do snorers drink more ?
+
+We first calculate the mean and median alcohol consumption in each snoring group to describe and compare their alcohol consumption.
+
+```{r Alcohol consumption Means}
+# Mean alcohol consumption for each snoring group
+tapply(snore$alcool, snore$snore, mean)
+
+# Median alcohol consumption for each snoring group
+tapply(snore$alcool, snore$snore, median)
+```
+
+We visualize alcohol consumption in snorers and non-snorers to compare the distributions and identify possible differences or extreme values.
+
+```{r Alcohol consumption Boxplot}
+# Compare alcohol consumption between snorers and non-snorers
+ggplot(snore, aes(x = snore, y = alcool)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.1) +
+  labs(
+    x = "Snoring status",
+    y = "Alcohol consumption"
+  )
+```
+
+We use a Mann–Whitney U test to determine whether alcohol consumption differs significantly between snorers and non-snorers.
+
+```{r Mann–Whitney U test3}
+
+# Perform a Mann–Whitney U test
+# H0: alcohol consumption does not differ between snorers and non-snorers
+# H1: alcohol consumption differs between snorers and non-snorers
+
+wilcox.test(alcool ~ snore, data = snore)
+```
+
+### Results : 
+
+Alcohol consumption was higher among snorers (mean = 4.03, median = 4) than among non-snorers (mean = 2.37, median = 0). For the statistical test part, since p = 0.008594 \< 0.05, we reject the null-hypothesis H0. A statistically significant difference in alcohol consumption was observed between snorers and non-snorers (Mann–Whitney U test, W = 788, p = 0.0086).
