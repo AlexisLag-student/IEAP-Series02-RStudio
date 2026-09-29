@@ -1,0 +1,43 @@
+---
+title: "_02-prepost"
+format: html
+---
+
+## 2.2 Effect of treatment over time
+
+### 2.2.1 Looking at the data
+
+Loading the necessary libraries
+
+```{r}
+# Load standard libraries
+library(tidyverse)
+```
+
+Loading the data
+
+```{r Loading the data and converting the data to columns}
+
+# Loading the data
+data_long <- read_csv("../Data/PrePost.csv")
+
+# Adding Subject IDs (assuming 8 patients in the exact same order)
+# and convert 'time' to a factor so 'Before' always plots first
+data_long <- data_long %>%
+  mutate(ID = rep(1:8, times = 2)) %>%
+  mutate(time = factor(time, levels = c("Before", "After")))
+
+# Pivot to wide format to easily calculate the difference
+data_wide <- data_long %>%
+  pivot_wider(names_from = time, values_from = perf) %>%
+  mutate(difference = After - Before)
+
+head(data_wide)
+```
+
+Variable Descriptions
+
+| Variable | Description | Unit | Possible values | Expected change |
+|:--------------|:--------------|:--------------|:--------------|:--------------|
+| `perf` | Physical performance score of the patient | not given in the file | positive values; here 125 to 148 | ↑ after rehabilitation |
+| `time` | Moment of the measurement | — | `Before`, `After` | — (factor) |
