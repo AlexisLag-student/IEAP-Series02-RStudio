@@ -1,0 +1,107 @@
+---
+title: "_02-prepost"
+format: html
+---
+
+## 2.2 Effect of treatment over time
+
+### 2.2.1 Looking at the data
+
+Loading the necessary libraries
+
+```{r}
+# Load standard libraries
+library(tidyverse)
+```
+
+Loading the data
+
+```{r Loading the data and converting the data to columns}
+
+# Loading the data
+data_long <- read_csv("../Data/PrePost.csv")
+
+# Adding Subject IDs (assuming 8 patients in the exact same order)
+# and convert 'time' to a factor so 'Before' always plots first
+data_long <- data_long %>%
+  mutate(ID = rep(1:8, times = 2)) %>%
+  mutate(time = factor(time, levels = c("Before", "After")))
+
+# Pivot to wide format to easily calculate the difference
+data_wide <- data_long %>%
+  pivot_wider(names_from = time, values_from = perf) %>%
+  mutate(difference = After - Before)
+
+head(data_wide)
+```
+
+Variable Descriptions
+
+| Variable | Description | Unit | Possible values | Expected change |
+|:--------------|:--------------|:--------------|:--------------|:--------------|
+| `perf` | Physical performance score of the patient | not given in the file | positive values; here 125 to 148 | ↑ after rehabilitation |
+| `time` | Moment of the measurement | — | `Before`, `After` | — (factor) |
+
+### **2.2.2 The analysis**
+
+#### Assessing normality
+
+First will check the normality by Shapiro-Wilk Normality Test, before deciding using Parametric or non-parametric test.
+
+```{r checking normality}
+# Check normality assumption
+shapiro_test <- shapiro.test(data_wide$difference)
+print(shapiro_test)
+```
+
+A Shapiro-Wilk test was conducted on the differences between post- and pre-treatment performance scores to evaluate the assumption of normality. The results show that the distribution of score differences does not significantly deviate from a normal distribution (W=0.899,p=0.283). Because p\>0.05, the assumption of normality is met, validating the choice of a parametric paired t-test for the main analysis.
+
+#### Running the paired t-test
+
+```{r parametric paired t-test}
+# Run the parametric paired t-test
+t_test_result <- t.test(data_wide$After, data_wide$Before, paired = TRUE)
+print(t_test_result)
+```
+
+A paired-samples t-test was performed to determine whether the cardiac rehabilitation training had a significant effect on participant performance over time. Performance scores significantly increased following the intervention (t(7)=5.40, p=0.001), with a mean improvement of 2.50 points (95% CI \[1.41,3.59\]). Because p\<0.05, we reject the null hypothesis and conclude that the rehabilitation program had a statistically significant positive effect on performance.
+
+#### Visualizing the data
+
+```{r}
+ggplot(data_long, aes(x = time, y = perf, fill = time)) +
+  geom_boxplot(alpha = 0.4, outlier.shape = NA, width = 0.5) +
+  geom_point(aes(group = ID), alpha = 0.8, size = 2) +
+  geom_line(aes(group = ID), alpha = 0.4, linewidth = 0.8) + 
+  labs(
+    title = "Performance Scores Before and After Cardiac Rehabilitation",
+    x = "Timepoint",
+    y = "Performance Score"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+Individual and aggregate changes in performance scores before and after cardiac rehabilitation. The boxplots represent the group's median and interquartile ranges at both timepoints. The connecting lines trace individual patient trajectories, illustrating that every single participant experienced an increase in their performance score following the intervention. A paired t-test confirmed this overall improvement (Mean difference = +2.5) is statistically significant (t = 5.40, p = 0.001).
+
+#### Questions 
+
+- Does the treatment have an effect?
+
+  - Yes. The physical performance scores increased for all 8 patients following the cardiac rehabilitation program. According to the paired test, the the rehabilitation program had a statistically significant positive effect (t(7)=5.40, p=0.001) on performance. The mean improvement was 2.50 points.
+
+<!-- -->
+
+- What comparison are you going to make?
+
+  - Which test will you use? Parametric or non-parametric?
+
+    - The parametric paired t-test. The Shapiro-Wilk test on the score differences yielded a p-value of 0.2828. Since this is greater than 0.05, the data meets the required assumption of normality, allowing for a parametric test.
+
+  - Which graph illustrates the effect of the treatment?
+
+    - A paired boxplot with connecting lines tracing individual patient trajectories. This design visualizes both the aggregate group shift and the distinct response of each patient from before to after the treatment.
+
+  - What sentence will you write in your thesis to explain your result?
+
+    - Following the cardiac rehabilitation training, patients demonstrated a statistically significant increase in physical performance scores, improving by an average of 2.5 units (paired t-test: t = 5.40, df = 7, p = 0.001).
