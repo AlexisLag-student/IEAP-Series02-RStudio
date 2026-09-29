@@ -14,3 +14,9 @@ confused with the standard error, which describes the precision of the mean [@al
 **What is a normal distribution?**
 A symmetric, bell-shaped distribution fully described by its mean and SD. About 68% of the
 values fall within ±1 SD of the mean and about 95% within ±1.96 SD [@altman1995].
+
+**What is a statistical test?**
+A procedure that uses sample data to decide whether the observed result is compatible with
+a null hypothesis $H_0$ (e.g. "no difference between groups"). It computes a test statistic
+and the probability of observing a statistic at least as extreme if $H_0$ were true
+[@greenland2016].
