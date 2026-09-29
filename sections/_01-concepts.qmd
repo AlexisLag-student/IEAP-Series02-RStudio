@@ -43,3 +43,8 @@ Independent observations (or independent pairs), a variable that is at least ord
 to interpret the Mann–Whitney test as a comparison of medians, distributions of similar
 shape in both groups [@hart2001]. The Wilcoxon signed-rank test also assumes that the
 differences are distributed symmetrically [@wilcoxon1945].
+
+**What is a p-value?**
+The probability, assuming $H_0$ is true (and all model assumptions hold), of obtaining a
+result at least as extreme as the one observed. It is *not* the probability that $H_0$ is
+true, and it does not measure the size or importance of an effect [@wasserstein2016].
