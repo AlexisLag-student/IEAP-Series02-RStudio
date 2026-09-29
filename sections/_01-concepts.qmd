@@ -48,3 +48,9 @@ differences are distributed symmetrically [@wilcoxon1945].
 The probability, assuming $H_0$ is true (and all model assumptions hold), of obtaining a
 result at least as extreme as the one observed. It is *not* the probability that $H_0$ is
 true, and it does not measure the size or importance of an effect [@wasserstein2016].
+
+**What is the risk of error when using a statistical test?**
+Type I error ($\alpha$): rejecting $H_0$ when it is true (false positive), usually fixed
+at 5%. Type II error ($\beta$): failing to reject $H_0$ when it is false (false negative);
+$1-\beta$ is the power of the test. Running many tests inflates the overall type I error
+[@banerjee2009].
