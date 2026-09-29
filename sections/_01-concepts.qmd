@@ -37,3 +37,9 @@ Independent observations, approximately normal data (or normal differences for p
 tests), and for some tests equal variances between groups. Normality can be checked with a
 Q–Q plot or a Shapiro–Wilk test [@ghasemi2012]; Welch's *t*-test removes the
 equal-variance assumption [@welch1947].
+
+**What are the assumptions of non-parametric tests?**
+Independent observations (or independent pairs), a variable that is at least ordinal and,
+to interpret the Mann–Whitney test as a comparison of medians, distributions of similar
+shape in both groups [@hart2001]. The Wilcoxon signed-rank test also assumes that the
+differences are distributed symmetrically [@wilcoxon1945].
