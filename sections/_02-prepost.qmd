@@ -101,3 +101,7 @@ Individual and aggregate changes in performance scores before and after cardiac 
   - Which graph illustrates the effect of the treatment?
 
     - A paired boxplot with connecting lines tracing individual patient trajectories. This design visualizes both the aggregate group shift and the distinct response of each patient from before to after the treatment.
+
+  - What sentence will you write in your thesis to explain your result?
+
+    - Following the cardiac rehabilitation training, patients demonstrated a statistically significant increase in physical performance scores, improving by an average of 2.5 units (paired t-test: t = 5.40, df = 7, p = 0.001).
