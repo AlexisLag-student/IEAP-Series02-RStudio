@@ -98,4 +98,6 @@ Individual and aggregate changes in performance scores before and after cardiac 
 
     - The parametric paired t-test. The Shapiro-Wilk test on the score differences yielded a p-value of 0.2828. Since this is greater than 0.05, the data meets the required assumption of normality, allowing for a parametric test.
 
-  - 
+  - Which graph illustrates the effect of the treatment?
+
+    - A paired boxplot with connecting lines tracing individual patient trajectories. This design visualizes both the aggregate group shift and the distinct response of each patient from before to after the treatment.
