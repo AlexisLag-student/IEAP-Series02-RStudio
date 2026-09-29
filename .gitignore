@@ -1,0 +1,16 @@
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# Quarto intermediate files (the final PDF is committed on purpose)
+/.quarto/
+*_files/
+*.tex
+*.log
+*.aux
+
+# OS
+.DS_Store
+Thumbs.db

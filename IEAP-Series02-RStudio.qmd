@@ -1,0 +1,31 @@
+---
+title: "IEAP-2025 Series 02 — Data mining and statistical tests"
+subtitle: "RStudio assignment · Team LAGARDE / THEBUWANA / GILLES"
+author:
+  - name: Alexis LAGARDE
+    affiliations: "Student A"
+  - name: Vidusha THEBUWANA
+    affiliations: "Student B"
+  - name: Chloé GILLES
+    affiliations: "Student C"
+date: today
+date-format: "D MMMM YYYY"
+lang: en
+format:
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+    fig-width: 6
+    fig-height: 4
+    geometry: margin=2.5cm
+  # If LaTeX is a problem on your computer, replace the pdf block above with:
+  # typst:
+  #   toc: true
+  #   section-numbering: "1.1"
+bibliography: references.bib
+execute:
+  echo: true
+  warning: false
+  message: false
+---
