@@ -131,3 +131,57 @@ wilcox.test(alcool ~ snore, data = snore)
 ### Results : 
 
 Alcohol consumption was higher among snorers (mean = 4.03, median = 4) than among non-snorers (mean = 2.37, median = 0). For the statistical test part, since p = 0.008594 \< 0.05, we reject the null-hypothesis H0. A statistically significant difference in alcohol consumption was observed between snorers and non-snorers (Mann–Whitney U test, W = 788, p = 0.0086).
+
+## Do snorers smoke more ?
+
+We calculate the number and proportion of smokers in each snoring group to determine whether smoking is more frequent among snorers.
+
+```{r Compare smoking statut between snorers and non-snorers}
+# Number of smokers and non-smokers in each snoring group
+table(snore$snore, snore$tabac)
+
+# Proportion of smokers within each snoring group
+prop.table(table(snore$snore, snore$tabac), margin = 1)
+```
+
+We visualize the proportion of smokers in each snoring group to make the difference between the two groups easier to interpret.
+
+```{r Contingency Table}
+# Create a contingency table
+smoking_table <- prop.table(
+  table(snore$snore, snore$tabac),
+  margin = 1
+)
+
+# Convert the table to a data frame
+smoking_data <- as.data.frame(smoking_table)
+
+# Rename the columns
+colnames(smoking_data) <- c("Snoring", "Smoking", "Proportion")
+
+# Plot the proportions
+ggplot(smoking_data, aes(x = Snoring, y = Proportion, fill = Smoking)) +
+  geom_col(position = "dodge") +
+  labs(
+    x = "Snoring status",
+    y = "Proportion",
+    fill = "Smoking status"
+  )
+```
+
+We use Fisher's exact test to determine whether smoking status is statistically associated with snoring status. Fisher's exact test was used because both snoring status and smoking status are categorical variables forming a 2 \* 2 contingency table.
+
+```{r Fisher exact test1}
+# Create a contingency table
+smoking_table <- table(snore$snore, snore$tabac)
+
+# Perform Fisher's exact test
+  # H0: smoking status and snoring status are independent
+  # H1: smoking status and snoring status are associated
+  
+  fisher.test(smoking_table)
+```
+
+### Results
+
+The proportion of smokers was 67.7% among non-snorers and 57.1% among snorers. Fisher's exact test showed no statistically significant association between smoking status and snoring status (p = 0.3827).
