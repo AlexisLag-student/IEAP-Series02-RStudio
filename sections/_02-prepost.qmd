@@ -19,7 +19,7 @@ Loading the data
 ```{r Loading the data and converting the data to columns}
 
 # Loading the data
-data_long <- read_csv("../Data/PrePost.csv")
+data_long <- read_csv("./Data/PrePost.csv")
 
 # Adding Subject IDs (assuming 8 patients in the exact same order)
 # and convert 'time' to a factor so 'Before' always plots first
