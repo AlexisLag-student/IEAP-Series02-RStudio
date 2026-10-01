@@ -50,3 +50,16 @@ included at render time.
 - [ ] One branch per question, merged into `main` through pull requests
 - [ ] No direct commit on `main` except the initial commit
 - [ ] Every team member has commits in the history
+
+**Report content**
+
+- [ ] Authors and date in the header
+- [ ] Clickable link to the public GitHub repository
+- [ ] Analysis of our Git workflow
+- [ ] Challenges and lessons learned
+- [ ] All questions of 2.1 answered, each with at least one reference
+- [ ] 2.2: variable table, comparison, test choice, figure, result sentence
+- [ ] 2.3: data, figure and result sentence for each of the five questions
+- [ ] Complete code visible in the PDF
+- [ ] Data sources with their URLs
+- [ ] Scientific references with their DOIs
