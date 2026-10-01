@@ -1,0 +1,15 @@
+
+# Epilogue: beyond comparing groups
+
+The tests above answer a descriptive question: *is there a difference between groups?*
+Data mining asks a different one: *can we use what we measured to predict or to group?*
+With the snoring data, a logistic regression could estimate the probability that a person
+snores from their age, BMI, alcohol and tobacco consumption, and tell us which factors
+contribute once the others are taken into account, something that separate two-group tests
+cannot do. Methods such as PCA or clustering go further and look for profiles of
+individuals without any outcome chosen in advance. These tools are only useful if we know
+why we use them: a prediction model needs a clear question, enough participants for the
+number of predictors, and validation on new data, otherwise it only describes the noise of
+one sample. In clinical or sport research, the value lies less in the algorithm than in the
+decision it supports, such as identifying patients who would benefit most from
+rehabilitation.
