@@ -1,0 +1,27 @@
+
+# Our Git workflow
+
+**Principle.** Git produces merge conflicts when two people edit the same lines in
+parallel. We therefore split the report into one master document
+(`IEAP-Series02-RStudio.qmd`) and several sub-documents (`sections/_*.qmd`) that are
+included at render time.
+
+**Branches.**
+
+- `main` is the graded branch. Nobody commits directly on it (except for the initial commit); it receives merges
+  through pull requests on GitHub.
+- One feature branch per question, created from an up-to-date `main`:
+  `2.1-concepts` (Alexis), `2.2-prepost` (Vidusha),
+  `2.3-Testing-some-sterotypes` (Chloé), `3-epilogue` (Alexis).
+- `git-cheklist` for the shared section.
+- `final`: last branch, used only to render and commit the PDF once everything is
+  merged.
+
+**Cycle for each question.**
+
+1. Create a new branch for a new section
+2. Work, then commit small, meaningful steps, e.g.
+3. Push the branch and create a pull request on GitHub
+4. Another team member reads the pull request and approves it; we merge into `main`
+
+**Commit messages.** Each message contains what was added or changed with the commit
