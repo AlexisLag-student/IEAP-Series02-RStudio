@@ -29,3 +29,51 @@ execute:
   warning: false
   message: false
 ---
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(here)
+theme_set(theme_minimal(base_size = 11))
+```
+
+# About this report {.unnumbered}
+
+-   **GitHub repository:** <https://github.com/AlexisLag-student/IEAP-Series02-RStudio>
+-   **Structure:** this file is the *master document*. Each section is written in its own file in `sections/` and included here at render time, so that each team member edits a different file and we never create merge conflicts.
+
+| Section | File | Owner |
+|:-----------------------|:-----------------------|:-----------------------|
+| 2.1 What is a statistical test? | `sections/_01-concepts.qmd` | Alexis LAGARDE |
+| 2.2 Effect of treatment over time | `sections/_02-prepost.qmd` | Vidusha THEBUWANA |
+| 2.3 Testing some stereotypes | `sections/_03-snore.qmd` | Chloé GILLES |
+| 3 Epilogue | `sections/_04-epilogue.qmd` | Alexis LAGARDE |
+| Git workflow, challenges, checklist | `sections/_05` | Done all together |
+
+{{< include sections/_01-concepts.qmd >}}
+
+{{< include sections/_02-prepost.qmd >}}
+
+{{< include sections/_03-Testing_some_stereotypes.qmd >}}
+
+{{< include sections/_04-epilogue.qmd >}}
+
+{{< include sections/_05-git-checklist.qmd >}}
+
+# Data sources {.unnumbered}
+
+| File | Description | Source (URL) |
+|:-----------------------|:-----------------------|:-----------------------|
+| `data/PrePost.csv` | Before/after measurements, cardiac rehabilitation | https://moodle.umontpellier.fr/pluginfile.php/2941023/mod_folder/content/0/Data-20250923.zip?forcedownload=1 |
+| `data/snore.txt` | Anthropometric and qualitative data, 1 person per line | https://moodle.umontpellier.fr/pluginfile.php/2941023/mod_folder/content/0/Data-20250923.zip?forcedownload=1 |
+
+# Software {.unnumbered}
+
+Analyses were run in R (`r R.version.string`) with the tidyverse [@wickham2019], and the report was written with Quarto.
+
+# References {.unnumbered}
+
+::: {#refs}
+:::
+
