@@ -26,3 +26,29 @@ sections/                   one sub-document per section, each with one owner
 The master document includes each file in `sections/` with
 `{{< include sections/_xx.qmd >}}`. Because each person edits only their own file, we
 never edit the same lines in parallel, so we avoid merge conflicts.
+
+## How to render
+
+Requirements: R (≥ 4.1), Quarto (≥ 1.4), the R package `tidyverse`, and a LaTeX
+distribution (`quarto install tinytex`).
+
+Open the `.qmd` in RStudio and click **Render**.
+
+## Git workflow
+
+- `main` only receives merges through pull requests.
+- One branch per question: `2.1-concepts`, `2.2-prepost`,
+  `2.3-snore`, `3-epilogue`, then `git-checklists` for shared sections and
+  `final` for the PDF.
+- Commit messages always contains the changes lade inside the file.
+
+See the _Our Git workflow_ section of the report for details.
+
+## Data
+
+The data files come from the course Moodle page (see the _Data sources_ section of the
+report).
+
+## License
+
+Code under the MIT License (see `LICENSE`). Text and figures © the authors, 2026.
