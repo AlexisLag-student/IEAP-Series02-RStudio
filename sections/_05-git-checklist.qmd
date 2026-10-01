@@ -25,3 +25,28 @@ included at render time.
 4. Another team member reads the pull request and approves it; we merge into `main`
 
 **Commit messages.** Each message contains what was added or changed with the commit
+
+## Challenges encountered
+
+- **Alexis:** Had to figure it out how the section folder is working, so we can work on the same project without overlaping what the group is doing. How to connect a reference bibliography to .qmd.
+- **Vidusha:** I often forget to commit after each change, this assignment reminds me to commit a significant change.
+- **Chloé:**: My branch was one commit behind because i cloned it before a change was made on main branch. I had to figure it out how to have my branch up to date. My R cells weren't computing, after restarting R environment, all worked together!
+
+# Checklist
+
+**Repository**
+
+- [ ] Public GitHub repository named `IEAP-Series02-RStudio`
+- [ ] `main` is up to date (all pull requests merged)
+- [ ] `README.md` explains the project, the structure, the team and how to render
+- [ ] `LICENSE` file present
+- [ ] `IEAP-Series02-RStudio.qmd` present and renders without error
+- [ ] `IEAP-Series02-RStudio.pdf` committed on `main` and uploaded to Moodle
+
+**Git history**
+
+- [ ] Meaningful commit messages, prefixed with the question number
+- [ ] At least one commit per question
+- [ ] One branch per question, merged into `main` through pull requests
+- [ ] No direct commit on `main` except the initial commit
+- [ ] Every team member has commits in the history
