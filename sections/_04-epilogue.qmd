@@ -1,0 +1,9 @@
+
+# Epilogue: beyond comparing groups
+
+The tests above answer a descriptive question: *is there a difference between groups?*
+Data mining asks a different one: *can we use what we measured to predict or to group?*
+With the snoring data, a logistic regression could estimate the probability that a person
+snores from their age, BMI, alcohol and tobacco consumption, and tell us which factors
+contribute once the others are taken into account, something that separate two-group tests
+cannot do.
