@@ -1,0 +1,65 @@
+
+# Our Git workflow
+
+**Principle.** Git produces merge conflicts when two people edit the same lines in
+parallel. We therefore split the report into one master document
+(`IEAP-Series02-RStudio.qmd`) and several sub-documents (`sections/_*.qmd`) that are
+included at render time.
+
+**Branches.**
+
+- `main` is the graded branch. Nobody commits directly on it (except for the initial commit); it receives merges
+  through pull requests on GitHub.
+- One feature branch per question, created from an up-to-date `main`:
+  `2.1-concepts` (Alexis), `2.2-prepost` (Vidusha),
+  `2.3-Testing-some-sterotypes` (Chloé), `3-epilogue` (Alexis).
+- `git-cheklist` for the shared section.
+- `final`: last branch, used only to render and commit the PDF once everything is
+  merged.
+
+**Cycle for each question.**
+
+1. Create a new branch for a new section
+2. Work, then commit small, meaningful steps, e.g.
+3. Push the branch and create a pull request on GitHub
+4. Another team member reads the pull request and approves it; we merge into `main`
+
+**Commit messages.** Each message contains what was added or changed with the commit
+
+## Challenges encountered
+
+- **Alexis:** Had to figure it out how the section folder is working, so we can work on the same project without overlaping what the group is doing. How to connect a reference bibliography to .qmd.
+- **Vidusha:** I often forget to commit after each change, this assignment reminds me to commit a significant change.
+- **Chloé:**: My branch was one commit behind because i cloned it before a change was made on main branch. I had to figure it out how to have my branch up to date. My R cells weren't computing, after restarting R environment, all worked together!
+
+# Checklist
+
+**Repository**
+
+- [ ] Public GitHub repository named `IEAP-Series02-RStudio`
+- [ ] `main` is up to date (all pull requests merged)
+- [ ] `README.md` explains the project, the structure, the team and how to render
+- [ ] `LICENSE` file present
+- [ ] `IEAP-Series02-RStudio.qmd` present and renders without error
+- [ ] `IEAP-Series02-RStudio.pdf` committed on `main` and uploaded to Moodle
+
+**Git history**
+
+- [ ] Meaningful commit messages, prefixed with the question number
+- [ ] At least one commit per question
+- [ ] One branch per question, merged into `main` through pull requests
+- [ ] No direct commit on `main` except the initial commit
+- [ ] Every team member has commits in the history
+
+**Report content**
+
+- [ ] Authors and date in the header
+- [ ] Clickable link to the public GitHub repository
+- [ ] Analysis of our Git workflow
+- [ ] Challenges and lessons learned
+- [ ] All questions of 2.1 answered, each with at least one reference
+- [ ] 2.2: variable table, comparison, test choice, figure, result sentence
+- [ ] 2.3: data, figure and result sentence for each of the five questions
+- [ ] Complete code visible in the PDF
+- [ ] Data sources with their URLs
+- [ ] Scientific references with their DOIs
